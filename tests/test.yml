@@ -1,0 +1,12 @@
+---
+# test file for jira
+
+- hosts: localhost
+  remote_user: root
+  roles:
+    #- jira
+    - postgresql
+    - postgresql_user
+    - postgresql_db
+    - apache2
+    - apache2_proxy

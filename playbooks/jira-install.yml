@@ -1,0 +1,7 @@
+---
+# shared playbook for jira setup
+
+- hosts: jira
+  remote_user: root
+  roles:
+    - jira
