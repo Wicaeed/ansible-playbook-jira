@@ -19,5 +19,5 @@
 - src: https://github.com/pantarei/ansible-role-postgresql-db.git
   name: postgresql_db
 
-#- src: https://github.com/pantarei/ansible-role-jira.git
-#  name: jira
+- src: https://github.com/pantarei/ansible-role-jira.git
+  name: jira
