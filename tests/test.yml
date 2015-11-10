@@ -6,6 +6,9 @@
   roles:
     - jira
     - mysql_connector_java
+    - mysql
+    - mysql_user
+    - mysql_db
     - postgresql
     - postgresql_user
     - postgresql_db
