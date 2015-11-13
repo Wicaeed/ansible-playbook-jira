@@ -11,34 +11,76 @@ license](https://img.shields.io/github/license/pantarei/ansible-playbook-jira.sv
 Ansible Playbook for Atlassian JIRA Installation.
 
 Requirements
-============
+------------
 
 This playbook require Ansible 1.9 or higher.
 
 This playbook was designed for Ubuntu Server 14.04 LTS.
 
-Deployment
-==========
+Quick Start
+-----------
 
-This stack can be on a single node or multiple nodes. The inventory file
-'hosts' defines the nodes in which the stack should be configured.
+All-in-one (AIO) builds are a great way to perform an JIRA build for
 
-    [jira]
-    jira.localdomain
+-   A development environment
+-   An overview of how all of the JIRA services fit together
+-   A simple lab deployment
 
-    [postgresql]
-    postresql.localdomain
+Although AIO builds aren’t recommended for large production deployments,
+they’re great for smaller proof-of-concept deployments.
 
-    [apache2_all]
-    apache2.localdomain
+AIO in One Step
+---------------
 
-Install roles depedency with following command:
+For a one-step build, there is a [convenient
+script](https://raw.githubusercontent.com/pantarei/ansible-playbook-jira/master/scripts/run-aio-build.sh)
+within the ansible-playbook-jira repository that will run a AIO build
+with defaults:
 
-    ansible-galaxy install -r roles.yml
+    bash <(curl -sL https://raw.githubusercontent.com/pantarei/ansible-playbook-jira/master/scripts/run-aio-build.sh)
 
-The stack can be deployed using the following command:
+It’s advised to run this build within a terminal muxer, like tmux or
+screen, so that you don’t lose your progress if you’re disconnected from
+your terminal session.
 
-    ansible-playbook -i hosts playbooks/setup-jira.yml
+AIO with Customization
+----------------------
+
+There are four main steps for running a customized AIO build:
+
+-   Install Ansible
+-   Initial roles, vars and hosts bootstrap
+-   Configuration *(this step is optional)*
+-   Run playbooks
+
+Start by cloning the ansible-playbook-jira repository and changing into
+the repository root directory:
+
+    $ git clone https://github.com/pantarei/ansible-playbook-jira.git \
+        /opt/ansible-playbook-jira
+    $ cd /opt/ansible-playbook-jira
+
+Next bootstrap Ansible by executing:
+
+    $ scripts/bootstrap-ansible.sh
+
+Now we can bootstrap Ansible's roles, vars and hosts by executing:
+
+    $ scripts/bootstrap-roles.sh
+    $ scripts/bootstrap-vars.sh
+    $ scripts/bootstrap-hosts.sh
+
+By default the scripts deploy only JIRA and PostgreSQL. At this point
+you may optionally adjuct which services are deployed within your AIO
+build. Look at the `group_vars/all` and `hosts` for more details. For
+example, if you'd like to upgrade your JIRA set the `jira_upgrade` as
+`true` at `group_vars/all`:
+
+    jira_upgrade: true
+
+Finally, run the plabooks by executing:
+
+    $ scripts/run-playbooks.sh
 
 License
 -------
