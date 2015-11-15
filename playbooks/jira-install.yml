@@ -4,5 +4,5 @@
 - hosts: jira
   remote_user: root
   roles:
-    - jira
-    - { role: mysql_connector_java, mysql_connector_java_dest: "{{ jira_catalina }}/lib" }
+    - hswong3i.jira
+    - hswong3i.mysql_connector_java
