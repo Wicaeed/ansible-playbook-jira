@@ -86,7 +86,6 @@ Dependencies
 -   [hswong3i.apache2\_vhosts](https://github.com/pantarei/ansible-role-apache2-vhosts)
 -   [hswong3i.apt](https://github.com/pantarei/ansible-role-apt)
 -   [hswong3i.java](https://github.com/pantarei/ansible-role-java)
--   [hswong3i.jira](https://github.com/pantarei/ansible-role-jira)
 -   [hswong3i.mysql](https://github.com/pantarei/ansible-role-mysql)
 -   [hswong3i.mysql\_connector\_java](https://github.com/pantarei/ansible-role-mysql-connector-java)
 -   [hswong3i.mysql\_db](https://github.com/pantarei/ansible-role-mysql-db)
@@ -95,6 +94,7 @@ Dependencies
 -   [hswong3i.postgresql\_db](https://github.com/pantarei/ansible-role-postgresql-db)
 -   [hswong3i.postgresql\_user](https://github.com/pantarei/ansible-role-postgresql-user)
 -   [hswong3i.ufw](https://github.com/pantarei/ansible-role-ufw)
+-   [hswong3i.jira](https://github.com/pantarei/ansible-role-jira)
 
 License
 -------
