@@ -2,8 +2,8 @@ Ansible Playbook for JIRA
 =========================
 
 [![Build Status](https://travis-ci.org/pantarei/ansible-playbook-jira.svg?branch=master)](https://travis-ci.org/pantarei/ansible-playbook-jira)
-[![GitHub tag](https://img.shields.io/github/tag/pantarei/ansible-playbook-jira.svg)](https://github.com/pantarei/ansible-playbook-jira)
-[![GitHub license](https://img.shields.io/github/license/pantarei/ansible-playbook-jira.svg)](https://github.com/pantarei/ansible-playbook-jira/blob/master/LICENSE)
+ [![GitHub tag](https://img.shields.io/github/tag/pantarei/ansible-playbook-jira.svg)](https://github.com/pantarei/ansible-playbook-jira)
+ [![GitHub license](https://img.shields.io/github/license/pantarei/ansible-playbook-jira.svg)](https://github.com/pantarei/ansible-playbook-jira/blob/master/LICENSE)
 
 Ansible Playbook for Atlassian JIRA Installation.
 
@@ -24,21 +24,21 @@ All-in-one (AIO) builds are a great way to perform an JIRA build for
 -   A simple lab deployment
 
 Although AIO builds aren’t recommended for large production deployments,
-they’re great for smaller proof-of-concept deployments.
+ they’re great for smaller proof-of-concept deployments.
 
 AIO in One Step
 ---------------
 
 For a one-step build, there is a [convenient
-script](https://raw.githubusercontent.com/pantarei/ansible-playbook-jira/master/scripts/run-aio-build.sh)
-within the ansible-playbook-jira repository that will run a AIO build
-with defaults:
+ script](https://raw.githubusercontent.com/pantarei/ansible-playbook-jira/master/scripts/run-aio-build.sh)
+ within the ansible-playbook-jira repository that will run a AIO build
+ with defaults:
 
     bash <(curl -sL https://raw.githubusercontent.com/pantarei/ansible-playbook-jira/master/scripts/run-aio-build.sh)
 
 It’s advised to run this build within a terminal muxer, like tmux or
-screen, so that you don’t lose your progress if you’re disconnected from
-your terminal session.
+ screen, so that you don’t lose your progress if you’re disconnected from
+ your terminal session.
 
 AIO with Customization
 ----------------------
@@ -51,7 +51,7 @@ There are four main steps for running a customized AIO build:
 -   Run playbooks
 
 Start by cloning the ansible-playbook-jira repository and changing into
-the repository root directory:
+ the repository root directory:
 
     $ git clone https://github.com/pantarei/ansible-playbook-jira.git \
         /opt/ansible-playbook-jira
@@ -68,10 +68,10 @@ Now we can bootstrap Ansible's roles, vars and hosts by executing:
     $ scripts/bootstrap-hosts.sh
 
 By default the scripts deploy only JIRA and PostgreSQL. At this point
-you may optionally adjuct which services are deployed within your AIO
-build. Look at the `group_vars/all` and `hosts` for more details. For
-example, if you'd like to upgrade your JIRA set the `jira_upgrade` as
-`true` at `group_vars/all`:
+ you may optionally adjuct which services are deployed within your AIO
+ build. Look at the `group_vars/all` and `hosts` for more details. For
+ example, if you'd like to upgrade your JIRA set the `jira_upgrade` as
+ `true` at `group_vars/all`:
 
     jira_upgrade: true
 
@@ -82,18 +82,19 @@ Finally, run the plabooks by executing:
 Dependencies
 ------------
 
--   [hswong3i.apt](https://galaxy.ansible.com/detail#/role/5970)
--   [hswong3i.java](https://galaxy.ansible.com/detail#/role/5971)
--   [hswong3i.apache2](https://galaxy.ansible.com/detail#/role/5972)
--   [hswong3i.apache2\_proxy](https://galaxy.ansible.com/detail#/role/5974)
--   [hswong3i.mysql](https://galaxy.ansible.com/detail#/role/5975)
--   [hswong3i.mysql\_user](https://galaxy.ansible.com/detail#/role/5977)
--   [hswong3i.mysql\_db](https://galaxy.ansible.com/detail#/role/5978)
--   [hswong3i.mysql\_connector\_java](https://galaxy.ansible.com/detail#/role/5979)
--   [hswong3i.postgresql](https://galaxy.ansible.com/detail#/role/5980)
--   [hswong3i.postgresql\_user](https://galaxy.ansible.com/detail#/role/5981)
--   [hswong3i.postgresql\_db](https://galaxy.ansible.com/detail#/role/5982)
--   [hswong3i.jira](https://galaxy.ansible.com/detail#/role/5989)
+-   [hswong3i.apache2](https://github.com/pantarei/ansible-role-apache2)
+-   [hswong3i.apache2\_vhosts](https://github.com/pantarei/ansible-role-apache2-vhosts)
+-   [hswong3i.apt](https://github.com/pantarei/ansible-role-apt)
+-   [hswong3i.java](https://github.com/pantarei/ansible-role-java)
+-   [hswong3i.jira](https://github.com/pantarei/ansible-role-jira)
+-   [hswong3i.mysql](https://github.com/pantarei/ansible-role-mysql)
+-   [hswong3i.mysql\_connector\_java](https://github.com/pantarei/ansible-role-mysql-connector-java)
+-   [hswong3i.mysql\_db](https://github.com/pantarei/ansible-role-mysql-db)
+-   [hswong3i.mysql\_user](https://github.com/pantarei/ansible-role-mysql-user)
+-   [hswong3i.postgresql](https://github.com/pantarei/ansible-role-postgresql)
+-   [hswong3i.postgresql\_db](https://github.com/pantarei/ansible-role-postgresql-db)
+-   [hswong3i.postgresql\_user](https://github.com/pantarei/ansible-role-postgresql-user)
+-   [hswong3i.ufw](https://github.com/pantarei/ansible-role-ufw)
 
 License
 -------
