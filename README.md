@@ -53,7 +53,7 @@ There are four main steps for running a customized AIO build:
 Start by cloning the ansible-playbook-jira repository and changing into
  the repository root directory:
 
-    $ git clone https://github.com/pantarei/ansible-playbook-jira.git \
+    $ git clone --recursive https://github.com/pantarei/ansible-playbook-jira.git \
         /opt/ansible-playbook-jira
     $ cd /opt/ansible-playbook-jira
 
