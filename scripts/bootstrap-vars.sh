@@ -7,7 +7,7 @@ cd $DIR/../
 
 # Generate a random password.
 PASSWD=`< /dev/urandom tr -dc A-Za-z0-9 | head -c8`
-SALT=`date | shasum -a 256`
+SALT=`date | shasum -a 256 | sed 's/^\(\w*\).*$/\1/g'`
 
 # Prepare group_vars/mysql.
 TMP_VARS=`mktemp`
@@ -41,11 +41,6 @@ TMP_VARS=`mktemp`
 echo -e "# Updated on `date`" >> $TMP_VARS
 find roles/*/defaults/*.yml -type f -exec cat {} \; | egrep -e '^\w*:' | egrep -e '^(apt|ufw|jira|mysql_connector_java).*:' | sort -u | sed 's/^/#/g;s/\[$/[]/g;s/{$/{}/g' >> $TMP_VARS
 echo -en '\n' >> $TMP_VARS
-perl -i -p -e "s/^#(jira_hash_salt):.*/\1: "$SALT"/g" $TMP_VARS
-perl -i -p -e "s/^#(jira_pass):.*/\1: "$PASSWD"/g" $TMP_VARS
-perl -i -p -e "s/^#(jira_proxy_name):.*/#\1: jira.example.com/g" $TMP_VARS
-perl -i -p -e "s/^#(jira_scheme):.*/#\1: https/g" $TMP_VARS
-perl -i -p -e "s/^#(jira_user):.*/\1: jira/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_connector_java_dest):.*/\1: \/usr\/share\/jira\/lib/g" $TMP_VARS
 perl -i -p -e "s/^#(ufw_to_port):.*/\1: [\n  { to_port: '22', proto: 'tcp', rule: 'allow' },\n  { to_port: '8005', proto: 'tcp', rule: 'allow' },\n  { to_port: '8080', proto: 'tcp', rule: 'allow' },\n  { to_port: '1024:65535', proto: 'tcp', rule: 'allow' },\n]/g" $TMP_VARS
 cat $TMP_VARS >> group_vars/jira
@@ -61,7 +56,7 @@ perl -i -p -e "s/^#(apache2_vhosts_proxy_pass_reverse):.*/#\1: \/   http:\/\/loc
 perl -i -p -e "s/^#(apache2_vhosts_proxy_preserve_host):.*/\1: 'Off'/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_proxy_request):.*/\1: 'On'/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_proxy_via):.*/\1: 'On'/g" $TMP_VARS
-perl -i -p -e "s/^#(apache2_vhosts_server_admin):.*/\1: \"webmaster@{{ jira_proxy_name }}\"/g" $TMP_VARS
+perl -i -p -e "s/^#(apache2_vhosts_server_admin):.*/\1: \"webmaster\@{{ jira_proxy_name }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_server_alias):.*/\1: []/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_server_name):.*/\1: \"{{ jira_proxy_name }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_ssl_certificate_file):.*/#\1: '\/etc\/ssl\/certs\/ssl-cert-snakeoil.pem'/g" $TMP_VARS
@@ -76,4 +71,9 @@ echo -e "# Updated on `date`" >> $TMP_VARS
 find roles/*/defaults/*.yml -type f -exec cat {} \; | egrep -e '^\w*:' | sort -u | sed 's/^/#/g;s/\[$/[]/g;s/{$/{}/g' >> $TMP_VARS
 echo -en '\n' >> $TMP_VARS
 perl -i -p -e "s/^#(apt_cache_valid_time):.*/\1: 0/g" $TMP_VARS
+perl -i -p -e "s/^#(jira_hash_salt):.*/\1: "$SALT"/g" $TMP_VARS
+perl -i -p -e "s/^#(jira_pass):.*/\1: "$PASSWD"/g" $TMP_VARS
+perl -i -p -e "s/^#(jira_proxy_name):.*/#\1: jira.example.com/g" $TMP_VARS
+perl -i -p -e "s/^#(jira_scheme):.*/#\1: https/g" $TMP_VARS
+perl -i -p -e "s/^#(jira_user):.*/\1: jira/g" $TMP_VARS
 cat $TMP_VARS >> group_vars/all
