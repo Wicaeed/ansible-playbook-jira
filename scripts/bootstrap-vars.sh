@@ -7,6 +7,7 @@ cd $DIR/../
 
 # Generate a random password.
 PASSWD=`< /dev/urandom tr -dc A-Za-z0-9 | head -c8`
+SALT=`date | shasum -a 256`
 
 # Prepare group_vars/mysql.
 TMP_VARS=`mktemp`
@@ -40,6 +41,7 @@ TMP_VARS=`mktemp`
 echo -e "# Updated on `date`" >> $TMP_VARS
 find roles/*/defaults/*.yml -type f -exec cat {} \; | egrep -e '^\w*:' | egrep -e '^(apt|ufw|jira|mysql_connector_java).*:' | sort -u | sed 's/^/#/g;s/\[$/[]/g;s/{$/{}/g' >> $TMP_VARS
 echo -en '\n' >> $TMP_VARS
+perl -i -p -e "s/^#(jira_hash_salt):.*/\1: "$SALT"/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_pass):.*/\1: "$PASSWD"/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_proxy_name):.*/#\1: jira.example.com/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_scheme):.*/#\1: https/g" $TMP_VARS
