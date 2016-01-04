@@ -1,7 +1,0 @@
----
-# deployment playbook for jira
-
-- include: jira-install.yml
-- include: mysql-install.yml
-- include: postgresql-install.yml
-- include: apache2-install.yml
