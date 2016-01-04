@@ -21,10 +21,12 @@ perl -i -p -e "s/^#(jira_pass):.*/\1: "$PASSWD"/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_proxy_name):.*/\1: jira.example.com/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_user):.*/\1: jira/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_db_name):.*/\1: \"{{ jira_user }}\"/g" $TMP_VARS
+perl -i -p -e "s/^#(mysql_user_db):.*/\1: \"{{ jira_user }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_user_name):.*/\1: \"{{ jira_user }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_user_password):.*/\1: \"{{ jira_pass }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_db_name):.*/\1: \"{{ jira_user }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_db_owner):.*/\1: \"{{ jira_user }}\"/g" $TMP_VARS
+perl -i -p -e "s/^#(postgresql_user_db):.*/\1: \"{{ jira_user }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_user_name):.*/\1: \"{{ jira_user }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_user_password):.*/\1: \"{{ jira_pass }}\"/g" $TMP_VARS
 cat $TMP_VARS >> group_vars/all
