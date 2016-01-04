@@ -70,14 +70,14 @@ Now we can bootstrap Ansible's roles, vars and hosts by executing:
 By default the scripts deploy only JIRA and PostgreSQL. At this point
  you may optionally adjuct which services are deployed within your AIO
  build. Look at the `group_vars/all` and `hosts` for more details. For
- example, if you'd like to upgrade your JIRA set the `jira_upgrade` as
- `true` at `group_vars/all`:
+ example, if you'd like to upgrade your Ubuntu set the `apt_upgrade` as
+ `full` at `group_vars/all`:
 
-    jira_upgrade: true
+    apt_upgrade: full
 
 Finally, run the plabooks by executing:
 
-    $ scripts/run-playbooks.sh
+    $ ansible-playbook -i hosts playbooks/run-aio-build.yml
 
 Dependencies
 ------------
