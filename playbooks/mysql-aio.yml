@@ -1,0 +1,12 @@
+---
+# shared playbook for mysql setup
+
+- hosts: mysql
+  remote_user: root
+  roles:
+    - hswong3i.apt
+    - hswong3i.ufw
+
+- include: mysql-service.yml
+
+- include: mysql-vhosts.yml
