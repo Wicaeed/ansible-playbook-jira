@@ -14,8 +14,13 @@ TMP_VARS=`mktemp`
 echo -e "# Updated on `date`" >> $TMP_VARS
 find roles/*/defaults/*.yml -type f -exec cat {} \; | egrep -e '^\w*:' | sort -u | sed 's/^/#/g;s/\[$/[]/g;s/{$/{}/g' >> $TMP_VARS
 echo -en '\n' >> $TMP_VARS
+perl -i -p -e "s/^#(apache2_http_port):.*/\1: 80/g" $TMP_VARS
+perl -i -p -e "s/^#(apache2_https_port):.*/\1: 443/g" $TMP_VARS
+perl -i -p -e "s/^#(apache2_vhosts_http_port):.*/\1: \"{{ apache2_http_port }}\"/g" $TMP_VARS
+perl -i -p -e "s/^#(apache2_vhosts_https_port):.*/\1: \"{{ apache2_https_port }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_server_name):.*/\1: \"{{ jira_proxy_name }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(apt_cache_valid_time):.*/\1: 3600/g" $TMP_VARS
+perl -i -p -e "s/^#(apt_upgrade):.*/\1: full/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_hash_salt):.*/\1: "$SALT"/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_pass):.*/\1: "$PASSWD"/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_proxy_name):.*/\1: jira.example.com/g" $TMP_VARS
@@ -68,8 +73,6 @@ echo -e "# Updated on `date`" >> $TMP_VARS
 find roles/*/defaults/*.yml -type f -exec cat {} \; | egrep -e '^\w*:' | egrep -e '^(apt|ufw|apache2).*:' | sort -u | sed 's/^/#/g;s/\[$/[]/g;s/{$/{}/g' >> $TMP_VARS
 echo -en '\n' >> $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_document_root):.*/\1: ~/g" $TMP_VARS
-perl -i -p -e "s/^#(apache2_vhosts_http_port):.*/\1: \"{{ apache2_http_port }}\"/g" $TMP_VARS
-perl -i -p -e "s/^#(apache2_vhosts_https_port):.*/\1: \"{{ apache2_https_port }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_proxy_pass):.*/#\1: \/   http:\/\/localhost:8080\//g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_proxy_pass_reverse):.*/#\1: \/   http:\/\/localhost:8080\//g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_proxy_preserve_host):.*/\1: 'Off'/g" $TMP_VARS
