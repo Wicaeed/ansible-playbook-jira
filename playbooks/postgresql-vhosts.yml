@@ -1,0 +1,8 @@
+---
+# shared playbook for postgresql setup
+
+- hosts: postgresql
+  remote_user: root
+  roles:
+    - hswong3i.postgresql_db
+    - hswong3i.postgresql_user
