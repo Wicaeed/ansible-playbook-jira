@@ -23,8 +23,8 @@ perl -i -p -e "s/^#(apache2_vhosts_http_port):.*/\1: \"{{ apache2_http_port }}\"
 perl -i -p -e "s/^#(apache2_vhosts_https_port):.*/\1: \"{{ apache2_https_port }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_id):.*/\1: jira/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_pass):.*/\1: \"$PASSWD\"/g" $TMP_VARS
-perl -i -p -e "s/^#(apache2_vhosts_proxy_pass):.*/#\1: \/   http:\/\/localhost:8080\//g" $TMP_VARS
-perl -i -p -e "s/^#(apache2_vhosts_proxy_pass_reverse):.*/#\1: \/   http:\/\/localhost:8080\//g" $TMP_VARS
+perl -i -p -e "s/^#(apache2_vhosts_proxy_pass):.*/#\1: \/   http:\/\/localhost:{{ jira_connector_port }}\//g" $TMP_VARS
+perl -i -p -e "s/^#(apache2_vhosts_proxy_pass_reverse):.*/#\1: \/   http:\/\/localhost:{{ jira_connector_port }}\//g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_proxy_preserve_host):.*/\1: 'Off'/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_proxy_request):.*/\1: 'On'/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_proxy_via):.*/\1: 'On'/g" $TMP_VARS
@@ -34,10 +34,12 @@ perl -i -p -e "s/^#(apache2_vhosts_uid):.*/\1: ~/g" $TMP_VARS
 perl -i -p -e "s/^#(apache2_vhosts_user):.*/\1: jira/g" $TMP_VARS
 perl -i -p -e "s/^#(apt_cache_valid_time):.*/\1: 3600/g" $TMP_VARS
 perl -i -p -e "s/^#(apt_upgrade):.*/\1: full/g" $TMP_VARS
+perl -i -p -e "s/^#(jira_connector_port):.*/\1: 8080/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_gid):.*/\1: \"{{ apache2_vhosts_gid }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_hash_salt):.*/\1: \"{{ apache2_vhosts_hash_salt }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_pass):.*/\1: \"{{ apache2_vhosts_pass }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_proxy_name):.*/\1: \"{{ apache2_vhosts_server_name }}\"/g" $TMP_VARS
+perl -i -p -e "s/^#(jira_server_port):.*/\1: 8005/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_uid):.*/\1: \"{{ apache2_vhosts_uid }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_user):.*/\1: \"{{ apache2_vhosts_user }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_connector_java_dest):.*/\1: \/usr\/share\/jira\/lib/g" $TMP_VARS
@@ -54,4 +56,5 @@ perl -i -p -e "s/^#(postgresql_vhosts_pass):.*/\1: \"{{ apache2_vhosts_pass }}\"
 perl -i -p -e "s/^#(postgresql_vhosts_template):.*/\1: template0/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_vhosts_user):.*/\1: \"{{ apache2_vhosts_user }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(ufw_route):.*/\1: []/g" $TMP_VARS
+perl -i -p -e "s/^#(ufw_to_port):.*/\1: [\n  { to_port: \"{{ apache2_http_port }}\", proto: \"tcp\", rule: \"allow\" },\n  { to_port: \"{{ apache2_https_port }}\", proto: \"tcp\", rule: \"allow\" },\n  { to_port: \"{{ jira_connector_port }}\", proto: \"tcp\", rule: \"allow\" },\n  { to_port: \"{{ jira_server_port }}\", proto: \"tcp\", rule: \"allow\" },\n]/g" $TMP_VARS
 cat $TMP_VARS >> group_vars/all
