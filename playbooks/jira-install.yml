@@ -1,0 +1,23 @@
+---
+
+- hosts: apache2
+  remote_user: root
+  roles:
+    - hswong3i.apache2_vhosts
+
+- hosts: mysql
+  remote_user: root
+  roles:
+    - hswong3i.mysql_vhosts
+
+- hosts: postgresql
+  remote_user: root
+  roles:
+    - hswong3i.postgresql_vhosts
+
+- hosts: jira
+  remote_user: root
+  roles:
+    - hswong3i.java
+    - hswong3i.jira
+    - hswong3i.mysql_connector_java
