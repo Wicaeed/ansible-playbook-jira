@@ -56,5 +56,12 @@ perl -i -p -e "s/^#(postgresql_vhosts_pass):.*/\1: \"{{ apache2_vhosts_pass }}\"
 perl -i -p -e "s/^#(postgresql_vhosts_template):.*/\1: \"template0\"/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_vhosts_user):.*/\1: \"{{ apache2_vhosts_user }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(ufw_route):.*/\1: []/g" $TMP_VARS
-perl -i -p -e "s/^#(ufw_to_port):.*/\1: [\n  { to_port: \"{{ apache2_http_port }}\", proto: \"tcp\", rule: \"allow\" },\n  { to_port: \"{{ apache2_https_port }}\", proto: \"tcp\", rule: \"allow\" },\n  { to_port: \"{{ jira_connector_port }}\", proto: \"tcp\", rule: \"allow\" },\n  { to_port: \"{{ jira_server_port }}\", proto: \"tcp\", rule: \"allow\" },\n]/g" $TMP_VARS
+perl -i -p -e "s/^#(ufw_to_port):.*/\1: [
+  { to_port: \"22\", proto: \"tcp\", rule: \"allow\" },
+  { to_port: \"1024:65535\", proto: \"tcp\", rule: \"allow\" },
+  { to_port: \"{{ apache2_http_port }}\", proto: \"tcp\", rule: \"allow\" },
+  { to_port: \"{{ apache2_https_port }}\", proto: \"tcp\", rule: \"allow\" },
+  { to_port: \"{{ jira_connector_port }}\", proto: \"tcp\", rule: \"allow\" },
+  { to_port: \"{{ jira_server_port }}\", proto: \"tcp\", rule: \"allow\" },
+]/g" $TMP_VARS
 cat $TMP_VARS >> group_vars/all
