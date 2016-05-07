@@ -44,11 +44,13 @@ perl -i -p -e "s/^#(jira_uid):.*/\1: \"{{ apache2_vhosts_uid }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(jira_user):.*/\1: \"{{ apache2_vhosts_user }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_connector_java_dest):.*/\1: \"\/usr\/share\/jira\/lib\"/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_connector_java_user):.*/\1: \"{{ apache2_vhosts_user }}\"/g" $TMP_VARS
+perl -i -p -e "s/^#(mysql_port):.*/\1: \"3306\"/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_vhosts_collation):.*/\1: \"utf8_bin\"/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_vhosts_encoding):.*/\1: \"utf8\"/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_vhosts_id):.*/\1: \"{{ apache2_vhosts_id }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_vhosts_pass):.*/\1: \"{{ apache2_vhosts_pass }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(mysql_vhosts_user):.*/\1: \"{{ apache2_vhosts_user }}\"/g" $TMP_VARS
+perl -i -p -e "s/^#(postgresql_port):.*/\1: \"5432\"/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_vhosts_encoding):.*/\1: \"UTF8\"/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_vhosts_id):.*/\1: \"{{ apache2_vhosts_id }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_vhosts_lc_collate):.*/\1: \"C\"/g" $TMP_VARS
@@ -56,13 +58,4 @@ perl -i -p -e "s/^#(postgresql_vhosts_lc_ctype):.*/\1: \"C\"/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_vhosts_pass):.*/\1: \"{{ apache2_vhosts_pass }}\"/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_vhosts_template):.*/\1: \"template0\"/g" $TMP_VARS
 perl -i -p -e "s/^#(postgresql_vhosts_user):.*/\1: \"{{ apache2_vhosts_user }}\"/g" $TMP_VARS
-perl -i -p -e "s/^#(ufw_route):.*/\1: []/g" $TMP_VARS
-perl -i -p -e "s/^#(ufw_to_port):.*/\1: [
-  { to_port: \"22\", proto: \"tcp\", rule: \"allow\" },
-  { to_port: \"1024:65535\", proto: \"tcp\", rule: \"allow\" },
-  { to_port: \"{{ apache2_http_port }}\", proto: \"tcp\", rule: \"allow\" },
-  { to_port: \"{{ apache2_https_port }}\", proto: \"tcp\", rule: \"allow\" },
-  { to_port: \"{{ jira_connector_port }}\", proto: \"tcp\", rule: \"allow\" },
-  { to_port: \"{{ jira_server_port }}\", proto: \"tcp\", rule: \"allow\" },
-]/g" $TMP_VARS
 cat $TMP_VARS >> group_vars/all

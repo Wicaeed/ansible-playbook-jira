@@ -4,3 +4,6 @@
   remote_user: root
   roles:
     - hswong3i.postgresql
+    - role: hswong3i.ufw
+      ufw_to_port:
+        - { to_port: "{{ postgresql_port }}", proto: "tcp", rule: "allow" }
