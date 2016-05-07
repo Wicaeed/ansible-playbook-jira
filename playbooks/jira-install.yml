@@ -21,3 +21,7 @@
     - hswong3i.java
     - hswong3i.mysql_connector_java
     - hswong3i.jira
+    - role: hswong3i.ufw
+      ufw_to_port:
+        - { to_port: "{{ jira_connector_port }}", proto: "tcp", rule: "allow" }
+        - { to_port: "{{ jira_server_port }}", proto: "tcp", rule: "allow" }
