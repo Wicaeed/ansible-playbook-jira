@@ -4,14 +4,30 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - hswong3i.apache2
-    - hswong3i.apache2_vhosts
-    - hswong3i.apt
-    - hswong3i.java
-    - hswong3i.mysql
-    - hswong3i.mysql_connector_java
-    - hswong3i.mysql_vhosts
-    - hswong3i.postgresql
-    - hswong3i.postgresql_vhosts
-    - hswong3i.ufw
-    - hswong3i.jira
+    - role: hswong3i.apt
+    - role: hswong3i.ufw
+    - role: hswong3i.apache2
+    - role: hswong3i.mysql
+    - role: hswong3i.postgresql
+    - role: hswong3i.java
+    - role: hswong3i.apache2_vhosts
+      apache2_vhosts_hash_salt: "wi6Eereiwae7phae"
+      apache2_vhosts_id: "jira"
+      apache2_vhosts_pass: "Xea4aesh"
+      apache2_vhosts_server_name: "jira.example.com"
+      apache2_vhosts_user: "jira"
+    - role: hswong3i.mysql_vhosts
+      mysql_vhosts_id: "jira"
+      mysql_vhosts_pass: "Xea4aesh"
+      mysql_vhosts_user: "jira"
+    - role: hswong3i.postgresql_vhosts
+      postgresql_vhosts_id: "jira"
+      postgresql_vhosts_pass: "Xea4aesh"
+      postgresql_vhosts_user: "jira"
+    - role: hswong3i.mysql_connector_java
+      mysql_connector_java_dest: "/usr/share/jira/lib"
+      mysql_connector_java_user: "jira"
+    - role: hswong3i.jira
+      jira_hash_salt: "wi6Eereiwae7phae"
+      jira_pass: "Xea4aesh"
+      jira_user: "jira"
