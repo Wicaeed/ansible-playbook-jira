@@ -18,7 +18,6 @@
 - hosts: jira
   remote_user: root
   roles:
-    - hswong3i.java
     - hswong3i.mysql_connector_java
     - hswong3i.jira
     - role: hswong3i.ufw
