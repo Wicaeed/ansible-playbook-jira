@@ -1,8 +1,0 @@
----
-# deployment playbook for jira
-
-# service/shared packages
-- include: apache2-core.yml
-- include: mysql-core.yml
-- include: postgresql-core.yml
-- include: jira-core.yml
