@@ -2,4 +2,4 @@
 
 set -o xtrace
 
-ansible-playbook -i inventory/jira playbooks/setup-everything.yml
+ansible-playbook -i inventory/jira.aio playbooks/setup-everything.yml
