@@ -16,4 +16,4 @@ jira.aio	ansible_host=127.0.0.1
 
 EOF
 done
-cat $TMP_HOSTS >> inventory/jira
+cat $TMP_HOSTS >> inventory/jira.aio
