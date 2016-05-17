@@ -1,13 +1,13 @@
-# Updated on Tue May 17 21:38:16 HKT 2016
+# Updated on Tue May 17 23:24:40 HKT 2016
 apache2_http_port: "80"
 apache2_https_port: "443"
 apache2_vhosts_document_root: ~
 apache2_vhosts_gid: ~
-apache2_vhosts_hash_salt: "DriP9QyR9wElGj4p"
+apache2_vhosts_hash_salt: "lFXzErjb3lO6viJZ"
 apache2_vhosts_http_port: "{{ apache2_http_port }}"
 apache2_vhosts_https_port: "{{ apache2_https_port }}"
 apache2_vhosts_id: "jira"
-apache2_vhosts_pass: "CrErQovt"
+apache2_vhosts_pass: "QTZ0ShOp"
 apache2_vhosts_proxy_pass: "/   http://localhost:{{ jira_connector_port }}/"
 apache2_vhosts_proxy_pass_reverse: "/   http://localhost:{{ jira_connector_port }}/"
 apache2_vhosts_proxy_preserve_host: "Off"
