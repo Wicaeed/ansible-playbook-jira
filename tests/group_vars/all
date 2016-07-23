@@ -1,14 +1,14 @@
-# Updated on Sat Jul 23 18:06:47 HKT 2016
+# Updated on Sat Jul 23 22:18:00 HKT 2016
 apache2_http_port: "80"
 apache2_https_port: "443"
 apache2_vhosts_document_root: ~
 apache2_vhosts_gid: ~
-apache2_vhosts_hash_salt: "alIKPjuqourig3dl"
+apache2_vhosts_hash_salt: "ClTcwV6W6rM1oh5q"
 apache2_vhosts_home: "/var/lib/jira"
 apache2_vhosts_http_port: "{{ apache2_http_port }}"
 apache2_vhosts_https_port: "{{ apache2_https_port }}"
 apache2_vhosts_id: "jira"
-apache2_vhosts_pass: "WHEGk29V"
+apache2_vhosts_pass: "sulWneyJ"
 apache2_vhosts_proxy_pass: "/   http://localhost:{{ jira_connector_port }}/"
 apache2_vhosts_proxy_pass_reverse: "/   http://localhost:{{ jira_connector_port }}/"
 apache2_vhosts_proxy_preserve_host: "Off"
@@ -33,7 +33,7 @@ jira_user: "{{ apache2_vhosts_user }}"
 mysql_connector_java_dest: "/usr/share/jira/lib"
 mysql_connector_java_user: "{{ apache2_vhosts_user }}"
 mysql_port: "3306"
-mysql_root_pass: "WHEGk29V"
+mysql_root_pass: "sulWneyJ"
 mysql_vhosts_collation: "utf8_bin"
 mysql_vhosts_encoding: "utf8"
 mysql_vhosts_id: "{{ apache2_vhosts_id }}"
