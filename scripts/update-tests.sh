@@ -2,8 +2,8 @@
 
 set -o xtrace
 
-rm -rf host_vars/*
-rm -rf inventory/*
+rm -rf host_vars/jira.aio
+rm -rf inventory/jira.aio
 
 scripts/bootstrap-inventory.sh
 scripts/bootstrap-jira.sh
